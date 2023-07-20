@@ -34,10 +34,6 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    firebaseAppDistribution {
-        appId = "1:313759870465:android:93337bdf7e86ffffbd5a00"
-    }
-
     kotlinOptions {
         jvmTarget = '1.8'
     }
@@ -62,6 +58,10 @@ android {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
+            firebaseAppDistribution {
+                appId = "1:313759870465:android:93337bdf7e86ffffbd5a00"
+            }
+
         }
     }
 }
