@@ -16,16 +16,24 @@ jobs:
         with:
           java-version: 1.8
 
-      - name: Install NDK
-        run: echo "y" | sudo /usr/local/lib/android/sdk/tools/bin/sdkmanager --install "ndk;20.0.5594570" --sdk_root=${ANDROID_SDK_ROOT}
+#      - name: Install NDK
+#        run: echo "y" | sudo /usr/local/lib/android/sdk/tools/bin/sdkmanager --install "ndk;20.0.5594570" --sdk_root=${ANDROID_SDK_ROOT}
+#
+#      - name: Build with Gradle
+#        run: ./gradlew build
+#
+#      - name: build release
+#        run: ./gradlew assembleRelease
+#      - name: list files
+#        run: ls -lrt app/build/outputs/apk/release
 
-      - name: Build with Gradle
-        run: ./gradlew build
+      - name: Push to Releases
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "build/app/outputs/apk/release/*"
+          tag: v1.0.${{ github.run_number }}
+          token: ${{ secrets.TOKEN }}
 
-      - name: build release
-        run: ./gradlew assembleRelease
-      - name: list files
-        run: ls -lrt app/build/outputs/apk/release
 
       - name: upload artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1.2.1
